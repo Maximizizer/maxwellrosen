@@ -10,8 +10,9 @@
      subtitle    — One-line tagline (optional)
      description — Full description shown in the modal. Supports HTML.
      tags        — Array of technology/topic strings
-     images      — Array of image paths (put files in images/projects/)
-                   Leave empty [] to show a placeholder.
+     images      — Array of {src, caption} objects.
+                   Put image files in images/projects/.
+                   caption is optional.
      liveUrl     — URL to live demo/site (optional, set to "" to hide)
      githubUrl   — GitHub repository URL (optional, set to "" to hide)
      extraLinks  — Array of {label, url} for any additional links
@@ -20,31 +21,28 @@
 
 const projects = [
   {
-    title:       "Project One",
-    subtitle:    "A brief tagline for the project",
-    description: `<p>Describe what this project does, the problem it solves, and what you learned building it. You can include <strong>bold text</strong> or other HTML here.</p>
-                  <p>Add a second paragraph with more detail about your approach, challenges you overcame, or notable technical decisions.</p>`,
-    tags:        ["JavaScript", "Node.js", "PostgreSQL"],
-    images:      [],          // e.g. ["images/projects/proj1-a.jpg", "images/projects/proj1-b.jpg"]
-    liveUrl:     "",          // e.g. "https://myproject.com"
-    githubUrl:   "",          // e.g. "https://github.com/you/repo"
-    extraLinks:  []           // e.g. [{label: "Paper", url: "https://..."}, ...]
-  },
-  {
-    title:       "Project Two",
-    subtitle:    "Another great project",
-    description: `<p>Write a compelling description here. What makes this project interesting? Who is it for?</p>`,
-    tags:        ["Python", "Machine Learning", "React"],
-    images:      [],
+    title:       "Salk Plant Phenotyping System",
+    subtitle:    "High-throughput imaging of 200+ Arabidopsis plants using Raspberry Pi",
+    description: `<p>Designed and deployed a high-throughput plant phenotyping platform at the Salk Institute's Ecker Lab to autonomously image and analyze 200+ <em>Arabidopsis thaliana</em> samples under variable environmental stress conditions.</p>
+                  <p>Built 4 Raspberry Pi–based imaging stations, each with an overhead camera mounted to the ceiling above a plant tray. Scalable Python scripts handle automated image capture on a timed schedule, then process each frame to extract growth metrics — leaf area, color distribution, and morphological features — across the full sample population.</p>
+                  <p>The system enables the lab to run large-scale growth experiments that would be impractical to monitor manually, generating a continuous record of plant development that feeds directly into downstream data analysis pipelines.</p>`,
+    tags:        ["Python", "Data Analysis", "Phenotyping"],
+    images:      [
+      { src: "images/projects/salk-camera-tray.jpg",       caption: "Camera connected to Raspberry Pi on the ceiling, imaging the plants" },
+      { src: "images/projects/salk-plant-trays.jpg",       caption: "Arabidopsis plants being imaged" },
+      { src: "images/projects/salk-analysis-pipeline.png", caption: "Imaging analysis pipeline visualized" }
+    ],
     liveUrl:     "",
-    githubUrl:   "",
+    githubUrl:   "https://github.com/kyle1686/eckerlabproj",
     extraLinks:  []
   },
   {
-    title:       "Project Three",
-    subtitle:    "Third project tagline",
-    description: `<p>Project description goes here. Highlight what makes this project unique and the impact it had.</p>`,
-    tags:        ["TypeScript", "AWS", "Docker"],
+    title:       "ESP32 OLED Mini-Game",
+    subtitle:    "Pixel-art dino runner built for a microcontroller — work in progress",
+    description: `<p>An ongoing hardware-software project to build a fully playable game on a small OLED display driven by an ESP32 microcontroller. The goal is a self-contained handheld device with physical buttons, no phone or computer required.</p>
+                  <p>The game is a pixel-art side-scrolling runner — a dinosaur dodges cacti and birds with a double-jump mechanic, while scroll speed increases over time to ramp up difficulty. The aesthetic is designed around the constraints of a monochrome OLED: high-contrast sprites drawn pixel-by-pixel, a dark background, and minimal UI.</p>
+                  <p>The web version (built in vanilla JavaScript on a canvas) serves as a development sandbox for tuning gameplay feel — physics, spawn timing, collision — before porting the logic to C++ for the Arduino firmware running on the ESP32.</p>`,
+    tags:        ["ESP32", "C++", "JavaScript"],
     images:      [],
     liveUrl:     "",
     githubUrl:   "",
@@ -62,7 +60,7 @@ function renderProjects() {
          aria-label="View details for ${p.title}"
          onkeydown="if(event.key==='Enter')openProjectModal(${i})">
       ${p.images.length > 0
-        ? `<img class="project-card-img" src="${p.images[0]}" alt="${p.title}" loading="lazy">`
+        ? `<img class="project-card-img" src="${p.images[0].src || p.images[0]}" alt="${p.title}" loading="lazy">`
         : `<div class="project-card-img-placeholder">
              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                <rect x="3" y="3" width="18" height="18" rx="2"/>
@@ -98,21 +96,24 @@ function openProjectModal(index) {
   const modal   = document.getElementById('project-modal');
   if (!overlay || !modal) return;
 
-  // Title & subtitle
   modal.querySelector('#modal-title').textContent    = p.title;
   modal.querySelector('#modal-subtitle').textContent = p.subtitle || '';
 
-  // Tags
   const tagsEl = modal.querySelector('#modal-tags');
   tagsEl.innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
 
-  // Images
+  // Images with optional captions
   const galleryEl = modal.querySelector('#modal-gallery');
   if (p.images.length > 0) {
-    galleryEl.innerHTML = p.images.map(src =>
-      `<img class="modal-gallery-img" src="${src}" alt="${p.title}" data-lightbox loading="lazy">`
-    ).join('');
-    // Re-attach lightbox listeners
+    galleryEl.innerHTML = p.images.map(img => {
+      const src     = img.src || img;
+      const caption = img.caption || '';
+      return `
+        <figure style="margin:0;">
+          <img class="modal-gallery-img" src="${src}" alt="${caption || p.title}" data-lightbox loading="lazy">
+          ${caption ? `<figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:5px;text-align:center;line-height:1.4;">${caption}</figcaption>` : ''}
+        </figure>`;
+    }).join('');
     galleryEl.querySelectorAll('[data-lightbox]').forEach(img => {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => openLightbox(img.src));
@@ -124,10 +125,8 @@ function openProjectModal(index) {
       </div>`;
   }
 
-  // Description
   modal.querySelector('#modal-desc').innerHTML = p.description;
 
-  // Links
   const linksEl = modal.querySelector('#modal-links');
   const linkBtns = [];
   if (p.liveUrl) linkBtns.push(

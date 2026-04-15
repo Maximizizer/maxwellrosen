@@ -28,8 +28,8 @@ const projects = [
                   <p>The system enables the lab to run large-scale growth experiments that would be impractical to monitor manually, generating a continuous record of plant development that feeds directly into downstream data analysis pipelines.</p>`,
     tags:        ["Python", "Data Analysis", "Phenotyping"],
     images:      [
-      { src: "images/projects/salk-camera-tray.jpg",       caption: "Camera connected to Raspberry Pi on the ceiling, imaging the plants" },
       { src: "images/projects/salk-plant-trays.jpg",       caption: "Arabidopsis plants being imaged" },
+      { src: "images/projects/salk-camera-tray.jpg",       caption: "Camera connected to Raspberry Pi on the ceiling, imaging the plants" },
       { src: "images/projects/salk-analysis-pipeline.png", caption: "Imaging analysis pipeline visualized" }
     ],
     liveUrl:     "",

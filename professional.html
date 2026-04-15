@@ -208,90 +208,13 @@
         <h2 class="section-title">Letters of Recommendation</h2>
       </div>
     </div>
-    <p class="section-desc" style="margin-top:-8px">
-      Click any letter to preview it. Files live in <code>documents/</code> — replace them anytime.
-    </p>
 
     <div class="rec-list">
 
-      <!--
-        HOW TO ADD A LETTER:
-        1. Add the PDF to documents/ (e.g. documents/rec-letter-1.pdf)
-        2. Copy one .rec-item block below, update data-file, name, and role.
-
-        To add more letters, just copy and paste a .rec-item block.
-      -->
-
-      <!-- Letter 1 -->
-      <div class="rec-item" id="rec-1">
-        <div class="rec-item-header" onclick="toggleRec('1', 'documents/rec-letter-1.pdf', this)">
-          <div class="rec-item-info">
-            <span class="rec-item-name">Dr. First Last</span><!-- ← CHANGE NAME -->
-            <span class="rec-item-role">Professor of [Field], [University]</span><!-- ← CHANGE ROLE -->
-          </div>
-          <div class="rec-item-actions">
-            <a class="btn btn-secondary btn-sm" href="documents/rec-letter-1.pdf" download onclick="event.stopPropagation()">
-              Download
-            </a>
-            <span class="rec-chevron" style="transition:transform 0.2s;color:var(--text-muted);">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
-            </span>
-          </div>
-        </div>
-        <div class="rec-preview-panel" id="rec-preview-1">
-          <div class="rec-iframe-wrap" id="rec-iframe-1"></div>
-        </div>
+      <!-- Placeholder — replace with real rec-item blocks when letters are ready -->
+      <div style="padding: 32px 24px; text-align: center; background: var(--bg-alt); border: 1px dashed var(--border); border-radius: var(--radius); color: var(--text-muted); font-size: 0.9rem;">
+        Coming soon
       </div>
-
-      <!-- Letter 2 -->
-      <div class="rec-item" id="rec-2">
-        <div class="rec-item-header" onclick="toggleRec('2', 'documents/rec-letter-2.pdf', this)">
-          <div class="rec-item-info">
-            <span class="rec-item-name">Dr. First Last</span><!-- ← CHANGE NAME -->
-            <span class="rec-item-role">Director of [Department], [Organization]</span><!-- ← CHANGE ROLE -->
-          </div>
-          <div class="rec-item-actions">
-            <a class="btn btn-secondary btn-sm" href="documents/rec-letter-2.pdf" download onclick="event.stopPropagation()">
-              Download
-            </a>
-            <span class="rec-chevron" style="transition:transform 0.2s;color:var(--text-muted);">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
-            </span>
-          </div>
-        </div>
-        <div class="rec-preview-panel" id="rec-preview-2">
-          <div class="rec-iframe-wrap" id="rec-iframe-2"></div>
-        </div>
-      </div>
-
-      <!-- Letter 3 -->
-      <div class="rec-item" id="rec-3">
-        <div class="rec-item-header" onclick="toggleRec('3', 'documents/rec-letter-3.pdf', this)">
-          <div class="rec-item-info">
-            <span class="rec-item-name">Dr. First Last</span><!-- ← CHANGE NAME -->
-            <span class="rec-item-role">[Title], [Company / Institution]</span><!-- ← CHANGE ROLE -->
-          </div>
-          <div class="rec-item-actions">
-            <a class="btn btn-secondary btn-sm" href="documents/rec-letter-3.pdf" download onclick="event.stopPropagation()">
-              Download
-            </a>
-            <span class="rec-chevron" style="transition:transform 0.2s;color:var(--text-muted);">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
-            </span>
-          </div>
-        </div>
-        <div class="rec-preview-panel" id="rec-preview-3">
-          <div class="rec-iframe-wrap" id="rec-iframe-3"></div>
-        </div>
-      </div>
-
-      <!-- Copy the block above to add more letters -->
 
     </div><!-- /rec-list -->
 

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  HOW TO UPDATE YOUR DOCUMENTS                                ║
+  ║  ──────────────────────────────────────────────────────────  ║
+  ║  Simply drop your PDF files into the documents/ folder       ║
+  ║  using these exact filenames:                                ║
+  ║                                                              ║
+  ║    documents/personal-statement.pdf                          ║
+  ║    documents/resume.pdf                                      ║
+  ║    documents/cv.pdf                                          ║
+  ║    documents/rec-letter-1.pdf   (first letter)               ║
+  ║    documents/rec-letter-2.pdf   (second letter)              ║
+  ║    documents/rec-letter-3.pdf   (third letter, etc.)         ║
+  ║                                                              ║
+  ║  To add more recommendation letters, copy one of the         ║
+  ║  .rec-item blocks below and update the data-file attribute.  ║
+  ╚══════════════════════════════════════════════════════════════╝
+  -->
+  <title>Professional — Maxwell Rosen</title><!-- ← CHANGE NAME -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Teal gradient accent for professional page header */
+    .pro-hero {
+      background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 60%, #f0fdfa 100%);
+      border-radius: 18px;
+      padding: 48px;
+      margin-bottom: 56px;
+      border: 1px solid #99f6e4;
+    }
+
+    .doc-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .doc-status.available {
+      background: #dcfce7;
+      color: #15803d;
+    }
+    .doc-status.missing {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .doc-status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .preview-btn-active {
+      background: var(--accent-soft) !important;
+      color: var(--accent) !important;
+      border-color: var(--accent) !important;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ──────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Maxwell Rosen</a><!-- ← CHANGE THIS -->
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="professional.html">Professional</a>
+      <a href="projects.html">Projects</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="nav-drawer">
+  <a href="index.html">About</a>
+  <a href="professional.html">Professional</a>
+  <a href="projects.html">Projects</a>
+</div>
+
+<!-- ── Main ──────────────────────────────────────────────────── -->
+<main>
+  <div class="page">
+
+    <!-- Hero -->
+    <div class="pro-hero">
+      <p class="section-label">Professional</p>
+      <h1 class="page-title">Documents &amp; Materials</h1>
+      <p class="page-subtitle">
+        Preview or download my professional documents below. All files open
+        directly in the browser — no download required.
+      </p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════
+         PRIMARY DOCUMENTS
+         (Personal Statement, Resume, CV)
+         ═══════════════════════════════════════════ -->
+    <div class="section-header">
+      <div>
+        <p class="section-label">Documents</p>
+        <h2 class="section-title">Core Materials</h2>
+      </div>
+    </div>
+
+    <div class="doc-grid" style="grid-template-columns: 1fr;">
+
+      <!-- ── Resume ── -->
+      <div class="doc-card" id="card-resume">
+        <div class="doc-card-header">
+          <div class="doc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+          </div>
+          <div>
+            <div class="doc-card-title">Resume</div>
+            <div class="doc-card-desc">
+              One-page summary of my education, experience, and skills.
+            </div>
+          </div>
+        </div>
+        <div class="doc-card-actions">
+          <button class="btn btn-primary btn-sm" onclick="togglePreview('resume', 'documents/resume.pdf', this)">
+            Preview
+          </button>
+          <a class="btn btn-secondary btn-sm" href="documents/resume.pdf" download>
+            Download
+          </a>
+          <a class="btn btn-ghost btn-sm" href="documents/resume.pdf" target="_blank" rel="noopener">
+            Open ↗
+          </a>
+        </div>
+        <div class="doc-preview-panel" id="preview-resume">
+          <div class="doc-preview-bar">
+            <span class="preview-title">Resume</span>
+            <button class="btn btn-ghost btn-sm" onclick="togglePreview('resume', 'documents/resume.pdf', document.querySelector('#card-resume .btn-primary'))">Close</button>
+          </div>
+          <div class="doc-iframe-wrap" id="iframe-wrap-resume"></div>
+        </div>
+      </div>
+
+      <!-- ── CV ── -->
+      <div class="doc-card" id="card-cv">
+        <div class="doc-card-header">
+          <div class="doc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="doc-card-title">Curriculum Vitae</div>
+            <div class="doc-card-desc">
+              Comprehensive record of my academic and professional history.
+            </div>
+          </div>
+        </div>
+        <div class="doc-card-actions">
+          <button class="btn btn-primary btn-sm" onclick="togglePreview('cv', 'documents/cv.pdf', this)">
+            Preview
+          </button>
+          <a class="btn btn-secondary btn-sm" href="documents/cv.pdf" download>
+            Download
+          </a>
+          <a class="btn btn-ghost btn-sm" href="documents/cv.pdf" target="_blank" rel="noopener">
+            Open ↗
+          </a>
+        </div>
+        <div class="doc-preview-panel" id="preview-cv">
+          <div class="doc-preview-bar">
+            <span class="preview-title">Curriculum Vitae</span>
+            <button class="btn btn-ghost btn-sm" onclick="togglePreview('cv', 'documents/cv.pdf', document.querySelector('#card-cv .btn-primary'))">Close</button>
+          </div>
+          <div class="doc-iframe-wrap" id="iframe-wrap-cv"></div>
+        </div>
+      </div>
+
+    </div><!-- /doc-grid -->
+
+    <hr class="divider">
+
+
+    <!-- ═══════════════════════════════════════════
+         LETTERS OF RECOMMENDATION
+         ═══════════════════════════════════════════ -->
+    <div class="section-header">
+      <div>
+        <p class="section-label">References</p>
+        <h2 class="section-title">Letters of Recommendation</h2>
+      </div>
+    </div>
+    <p class="section-desc" style="margin-top:-8px">
+      Click any letter to preview it. Files live in <code>documents/</code> — replace them anytime.
+    </p>
+
+    <div class="rec-list">
+
+      <!--
+        HOW TO ADD A LETTER:
+        1. Add the PDF to documents/ (e.g. documents/rec-letter-1.pdf)
+        2. Copy one .rec-item block below, update data-file, name, and role.
+
+        To add more letters, just copy and paste a .rec-item block.
+      -->
+
+      <!-- Letter 1 -->
+      <div class="rec-item" id="rec-1">
+        <div class="rec-item-header" onclick="toggleRec('1', 'documents/rec-letter-1.pdf', this)">
+          <div class="rec-item-info">
+            <span class="rec-item-name">Dr. First Last</span><!-- ← CHANGE NAME -->
+            <span class="rec-item-role">Professor of [Field], [University]</span><!-- ← CHANGE ROLE -->
+          </div>
+          <div class="rec-item-actions">
+            <a class="btn btn-secondary btn-sm" href="documents/rec-letter-1.pdf" download onclick="event.stopPropagation()">
+              Download
+            </a>
+            <span class="rec-chevron" style="transition:transform 0.2s;color:var(--text-muted);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="rec-preview-panel" id="rec-preview-1">
+          <div class="rec-iframe-wrap" id="rec-iframe-1"></div>
+        </div>
+      </div>
+
+      <!-- Letter 2 -->
+      <div class="rec-item" id="rec-2">
+        <div class="rec-item-header" onclick="toggleRec('2', 'documents/rec-letter-2.pdf', this)">
+          <div class="rec-item-info">
+            <span class="rec-item-name">Dr. First Last</span><!-- ← CHANGE NAME -->
+            <span class="rec-item-role">Director of [Department], [Organization]</span><!-- ← CHANGE ROLE -->
+          </div>
+          <div class="rec-item-actions">
+            <a class="btn btn-secondary btn-sm" href="documents/rec-letter-2.pdf" download onclick="event.stopPropagation()">
+              Download
+            </a>
+            <span class="rec-chevron" style="transition:transform 0.2s;color:var(--text-muted);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="rec-preview-panel" id="rec-preview-2">
+          <div class="rec-iframe-wrap" id="rec-iframe-2"></div>
+        </div>
+      </div>
+
+      <!-- Letter 3 -->
+      <div class="rec-item" id="rec-3">
+        <div class="rec-item-header" onclick="toggleRec('3', 'documents/rec-letter-3.pdf', this)">
+          <div class="rec-item-info">
+            <span class="rec-item-name">Dr. First Last</span><!-- ← CHANGE NAME -->
+            <span class="rec-item-role">[Title], [Company / Institution]</span><!-- ← CHANGE ROLE -->
+          </div>
+          <div class="rec-item-actions">
+            <a class="btn btn-secondary btn-sm" href="documents/rec-letter-3.pdf" download onclick="event.stopPropagation()">
+              Download
+            </a>
+            <span class="rec-chevron" style="transition:transform 0.2s;color:var(--text-muted);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="rec-preview-panel" id="rec-preview-3">
+          <div class="rec-iframe-wrap" id="rec-iframe-3"></div>
+        </div>
+      </div>
+
+      <!-- Copy the block above to add more letters -->
+
+    </div><!-- /rec-list -->
+
+  </div><!-- /page -->
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────── -->
+<footer class="footer">
+  <p>© <span id="year"></span> Maxwell Rosen</p>
+  <div style="display:flex;justify-content:center;gap:20px;margin-top:10px;">
+    <a href="mailto:m2rosen@ucsd.edu" style="color:var(--text-light);font-size:0.85rem;">m2rosen@ucsd.edu</a>
+    <a href="https://www.linkedin.com/in/maxwell-rosen-242777299/" target="_blank" rel="noopener" style="color:var(--text-light);font-size:0.85rem;">LinkedIn</a>
+    <a href="https://github.com/Maximizizer" target="_blank" rel="noopener" style="color:var(--text-light);font-size:0.85rem;">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── Document preview toggle ─────────────────────────────── */
+  const openPreviews = {};
+
+  function togglePreview(id, filePath, btn) {
+    const panel   = document.getElementById('preview-' + id);
+    const wrap    = document.getElementById('iframe-wrap-' + id);
+    const isOpen  = panel.classList.contains('open');
+
+    // Close all other open previews
+    document.querySelectorAll('.doc-preview-panel.open').forEach(p => p.classList.remove('open'));
+    document.querySelectorAll('.btn-primary').forEach(b => b.classList.remove('preview-btn-active'));
+
+    if (!isOpen) {
+      panel.classList.add('open');
+      btn.classList.add('preview-btn-active');
+      btn.textContent = 'Close';
+      // Lazy-load the iframe only once
+      if (!openPreviews[id]) {
+        wrap.innerHTML = buildIframe(filePath);
+        openPreviews[id] = true;
+      }
+      // Scroll to panel smoothly
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+    } else {
+      btn.textContent = 'Preview';
+    }
+  }
+
+  /* ── Recommendation letter toggle ────────────────────────── */
+  function toggleRec(id, filePath, headerEl) {
+    const panel   = document.getElementById('rec-preview-' + id);
+    const wrap    = document.getElementById('rec-iframe-' + id);
+    const chevron = headerEl.querySelector('.rec-chevron');
+    const isOpen  = panel.classList.contains('open');
+
+    panel.classList.toggle('open');
+    chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+
+    if (!isOpen && !openPreviews['rec-' + id]) {
+      wrap.innerHTML = buildIframe(filePath);
+      openPreviews['rec-' + id] = true;
+    }
+  }
+
+  /* ── Build iframe HTML ───────────────────────────────────── */
+  function buildIframe(src) {
+    return `
+      <iframe
+        src="${src}"
+        title="Document preview"
+        loading="lazy"
+        onerror="this.parentElement.innerHTML = noFileMsg('${src}')"
+      ></iframe>
+      <noscript>
+        <div class="doc-no-file">JavaScript is disabled — <a href="${src}">open the file directly</a>.</div>
+      </noscript>
+    `;
+  }
+
+  function noFileMsg(src) {
+    return `
+      <div class="doc-no-file">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.3">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <strong>File not found</strong>
+        <span>Place your PDF at <code>${src}</code></span>
+        <a class="btn btn-secondary btn-sm" href="${src}" target="_blank">Try opening directly ↗</a>
+      </div>`;
+  }
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

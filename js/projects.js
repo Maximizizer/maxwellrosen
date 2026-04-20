@@ -105,15 +105,17 @@ function openProjectModal(index) {
   // Images with optional captions
   const galleryEl = modal.querySelector('#modal-gallery');
   if (p.images.length > 0) {
-    galleryEl.innerHTML = p.images.map(img => {
-      const src     = img.src || img;
-      const caption = img.caption || '';
-      return `
-        <figure style="margin:0;">
-          <img src="${src}" alt="${caption || p.title}" data-lightbox loading="lazy">
-          ${caption ? `<figcaption>${caption}</figcaption>` : ''}
-        </figure>`;
-    }).join('');
+    galleryEl.innerHTML =
+      `<hr class="divider" style="margin:0 0 20px;">` +
+      p.images.map(img => {
+        const src     = img.src || img;
+        const caption = img.caption || '';
+        return `
+          <figure style="margin:0;">
+            <img src="${src}" alt="${caption || p.title}" data-lightbox loading="lazy">
+            ${caption ? `<figcaption>${caption}</figcaption>` : ''}
+          </figure>`;
+      }).join('');
     galleryEl.querySelectorAll('[data-lightbox]').forEach(img => {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => openLightbox(img.src));

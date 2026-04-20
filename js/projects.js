@@ -44,10 +44,10 @@ const projects = [
                   <p>The web version (built in vanilla JavaScript on a canvas) serves as a development sandbox for tuning gameplay feel — physics, spawn timing, collision — before porting the logic to C++ for the Arduino firmware running on the ESP32.</p>`,
     tags:        ["ESP32"],
     images:      [
-      { src: "images/projects/esp32-setup-overview.jpg", caption: "Full setup — ESP32 breadboard connected to laptop web controller" },
       { src: "images/projects/esp32-start-screen.jpg",   caption: "OLED display on startup: 'DINO GAME — Press SPACE to start'" },
       { src: "images/projects/esp32-gameplay.jpg",        caption: "Live gameplay on the 128×64 OLED display" },
-      { src: "images/projects/esp32-game-over.jpg",       caption: "Game over screen showing current score and personal best" }
+      { src: "images/projects/esp32-game-over.jpg",       caption: "Game over screen showing current score and personal best" },
+      { src: "images/projects/esp32-setup-overview.jpg", caption: "Full setup — ESP32 breadboard connected to laptop web controller" }
     ],
     liveUrl:     "",
     githubUrl:   "",

@@ -43,7 +43,12 @@ const projects = [
                   <p>The game is a pixel-art side-scrolling runner — a dinosaur dodges cacti and birds with a double-jump mechanic, while scroll speed increases over time to ramp up difficulty. The aesthetic is designed around the constraints of a monochrome OLED: high-contrast sprites drawn pixel-by-pixel, a dark background, and minimal UI.</p>
                   <p>The web version (built in vanilla JavaScript on a canvas) serves as a development sandbox for tuning gameplay feel — physics, spawn timing, collision — before porting the logic to C++ for the Arduino firmware running on the ESP32.</p>`,
     tags:        ["ESP32"],
-    images:      [],
+    images:      [
+      { src: "images/projects/esp32-setup-overview.jpg", caption: "Full setup — ESP32 breadboard connected to laptop web controller" },
+      { src: "images/projects/esp32-start-screen.jpg",   caption: "OLED display on startup: 'DINO GAME — Press SPACE to start'" },
+      { src: "images/projects/esp32-gameplay.jpg",        caption: "Live gameplay on the 128×64 OLED display" },
+      { src: "images/projects/esp32-game-over.jpg",       caption: "Game over screen showing current score and personal best" }
+    ],
     liveUrl:     "",
     githubUrl:   "",
     extraLinks:  []

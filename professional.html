@@ -30,6 +30,15 @@
   <meta name="twitter:title" content="Maxwell Rosen">
   <meta name="twitter:image" content="https://maximizizer.github.io/maxwellrosen/images/photos/headshot.jpg">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var system = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && system)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="css/style.css">
   <style>
     /* Teal gradient accent for professional page header */
@@ -39,6 +48,10 @@
       padding: 48px;
       margin-bottom: 56px;
       border: 1px solid #99f6e4;
+    }
+    [data-theme="dark"] .pro-hero {
+      background: linear-gradient(135deg, rgba(20,184,166,0.08) 0%, rgba(20,184,166,0.14) 60%, rgba(20,184,166,0.08) 100%);
+      border-color: rgba(20,184,166,0.25);
     }
 
     .doc-status {
@@ -91,6 +104,7 @@
       <a href="professional.html">Professional</a>
       <a href="projects.html">Projects</a>
     </div>
+    <button class="theme-toggle" aria-label="Toggle dark mode"></button>
     <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>

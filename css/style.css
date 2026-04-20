@@ -27,7 +27,7 @@
   --font:         'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif:   'Lora', Georgia, serif;
   --nav-height:   68px;
-  --max-width:    1080px;
+  --max-width:    1200px;
   --transition:   0.2s ease;
 }
 
@@ -165,7 +165,6 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
 .page-subtitle {
   font-size: 1.15rem;
   color: var(--text-muted);
-  max-width: 560px;
   line-height: 1.65;
 }
 
@@ -297,7 +296,6 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
 .hero-bio {
   font-size: 1.05rem;
   color: var(--text-muted);
-  max-width: 540px;
   line-height: 1.7;
   margin-bottom: 32px;
 }
@@ -339,7 +337,6 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
   font-size: 1.05rem;
   line-height: 1.8;
   color: var(--text-muted);
-  max-width: 680px;
 }
 .about-text p + p { margin-top: 16px; }
 

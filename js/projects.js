@@ -110,8 +110,8 @@ function openProjectModal(index) {
       const caption = img.caption || '';
       return `
         <figure style="margin:0;">
-          <img class="modal-gallery-img" src="${src}" alt="${caption || p.title}" data-lightbox loading="lazy">
-          ${caption ? `<figcaption style="font-size:0.78rem;color:var(--text-muted);margin-top:5px;text-align:center;line-height:1.4;">${caption}</figcaption>` : ''}
+          <img src="${src}" alt="${caption || p.title}" data-lightbox loading="lazy">
+          ${caption ? `<figcaption>${caption}</figcaption>` : ''}
         </figure>`;
     }).join('');
     galleryEl.querySelectorAll('[data-lightbox]').forEach(img => {

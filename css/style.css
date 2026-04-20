@@ -730,21 +730,33 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
 /* Modal image gallery */
 .modal-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
   margin-bottom: 24px;
 }
 
-.modal-gallery-img {
+.modal-gallery img {
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  cursor: pointer;
-  transition: transform var(--transition);
+  cursor: zoom-in;
+  transition: transform var(--transition), box-shadow var(--transition);
+  display: block;
 }
-.modal-gallery-img:hover { transform: scale(1.02); }
+.modal-gallery img:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-md);
+}
+
+.modal-gallery figcaption {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-align: center;
+  line-height: 1.3;
+}
 
 .modal-gallery-placeholder {
   width: 100%;

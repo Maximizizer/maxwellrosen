@@ -730,9 +730,9 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
 /* Modal image gallery */
 .modal-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 8px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 24px;
 }
 
 .modal-gallery figure {
@@ -741,25 +741,22 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
 
 .modal-gallery img {
   width: 100%;
-  height: 110px;
+  aspect-ratio: 4/3;
   object-fit: cover;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   cursor: zoom-in;
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition);
   display: block;
 }
-.modal-gallery img:hover {
-  transform: scale(1.03);
-  box-shadow: var(--shadow-md);
-}
+.modal-gallery img:hover { transform: scale(1.04); }
 
 .modal-gallery figcaption {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
-  margin-top: 4px;
+  margin-top: 5px;
   text-align: center;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .modal-gallery-placeholder {
@@ -789,6 +786,12 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
   gap: 10px;
   padding-top: 20px;
   border-top: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+.modal-gallery:not(:empty) {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
 }
 
 /* ── Lightbox ───────────────────────────────────────────────── */

@@ -38,20 +38,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
   }
 });
 
-// ── Active nav link ────────────────────────────────────────────
-(function () {
-  const page = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a, .nav-drawer a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (
-      href === page ||
-      (page === '' && href === 'index.html') ||
-      (href === 'index.html' && (page === '' || page === '/'))
-    ) {
-      link.classList.add('active');
-    }
-  });
-})();
+// Active nav link is set in js/nav.js when the menu is built.
 
 // ── Mobile hamburger menu ─────────────────────────────────────
 const hamburger = document.getElementById('hamburger');

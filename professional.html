@@ -69,6 +69,7 @@
     <!-- ═══════════════════════════════════════════
          PDF DOWNLOADS
          ═══════════════════════════════════════════ -->
+    <div class="docs-block">
     <div class="doc-grid doc-grid-compact">
 
       <div class="doc-card">
@@ -85,8 +86,9 @@
           </div>
         </div>
         <div class="doc-card-actions">
-          <a class="btn btn-primary btn-sm" href="documents/resume.pdf" target="_blank" rel="noopener">Open PDF ↗</a>
-          <a class="btn btn-secondary btn-sm" href="documents/resume.pdf" download>Download</a>
+          <button class="btn btn-primary btn-sm preview-btn" data-doc="resume" data-src="documents/resume.pdf" data-title="Resume" aria-controls="doc-preview" aria-expanded="false">Preview</button>
+          <a class="btn btn-secondary btn-sm" href="documents/resume.pdf" target="_blank" rel="noopener">Open PDF ↗</a>
+          <a class="btn btn-ghost btn-sm" href="documents/resume.pdf" download>Download</a>
         </div>
       </div>
 
@@ -104,12 +106,23 @@
           </div>
         </div>
         <div class="doc-card-actions">
-          <a class="btn btn-primary btn-sm" href="documents/cv.pdf" target="_blank" rel="noopener">Open PDF ↗</a>
-          <a class="btn btn-secondary btn-sm" href="documents/cv.pdf" download>Download</a>
+          <button class="btn btn-primary btn-sm preview-btn" data-doc="cv" data-src="documents/cv.pdf" data-title="Curriculum Vitae" aria-controls="doc-preview" aria-expanded="false">Preview</button>
+          <a class="btn btn-secondary btn-sm" href="documents/cv.pdf" target="_blank" rel="noopener">Open PDF ↗</a>
+          <a class="btn btn-ghost btn-sm" href="documents/cv.pdf" download>Download</a>
         </div>
       </div>
 
     </div>
+
+    <!-- One shared preview area for both PDFs (filled by the script at the bottom) -->
+    <div class="doc-preview-panel doc-preview-shared" id="doc-preview" hidden>
+      <div class="doc-preview-bar">
+        <span class="preview-title" id="doc-preview-title"></span>
+        <button class="btn btn-ghost btn-sm" id="doc-preview-close">Close</button>
+      </div>
+      <div class="doc-iframe-wrap" id="doc-preview-frame"></div>
+    </div>
+    </div><!-- /docs-block -->
 
     <!-- ═══════════════════════════════════════════
          TEXT CV
@@ -423,6 +436,52 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── PDF preview ─────────────────────────────────────────────
+     Preview opens the PDF in the panel below the cards. Clicking the
+     same Preview again (or Close) hides it; the other Preview swaps it.
+     Note: phones (especially iPhone Safari) may show only the first
+     page, which is why "Open PDF" stays next to it. */
+  (function () {
+    const panel   = document.getElementById('doc-preview');
+    const frame   = document.getElementById('doc-preview-frame');
+    const titleEl = document.getElementById('doc-preview-title');
+    const buttons = document.querySelectorAll('.preview-btn');
+    let current = null;
+
+    function reset() {
+      buttons.forEach(b => {
+        b.textContent = 'Preview';
+        b.classList.remove('preview-btn-active');
+        b.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    function close() {
+      panel.hidden = true;
+      frame.innerHTML = '';
+      current = null;
+      reset();
+    }
+
+    function open(btn) {
+      const { doc, src, title } = btn.dataset;
+      reset();
+      btn.textContent = 'Close preview';
+      btn.classList.add('preview-btn-active');
+      btn.setAttribute('aria-expanded', 'true');
+      titleEl.textContent = title;
+      frame.innerHTML = `<iframe src="${src}" title="${title} PDF preview"></iframe>`;
+      panel.hidden = false;
+      current = doc;
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      if (current === btn.dataset.doc) close(); else open(btn);
+    }));
+    document.getElementById('doc-preview-close').addEventListener('click', close);
+  })();
 </script>
 <script src="js/main.js"></script>
 </body>

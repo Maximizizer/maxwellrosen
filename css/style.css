@@ -715,9 +715,26 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
   padding: 32px;
 }
 
+.docs-block { margin-bottom: 56px; }
 .doc-grid-compact {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  margin-bottom: 56px;
+  margin-bottom: 0;
+}
+
+/* Shared PDF preview under the Resume/CV cards */
+.doc-preview-shared {
+  display: block;
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.doc-preview-shared[hidden] { display: none; }
+.doc-preview-shared .doc-iframe-wrap { height: min(80vh, 900px); }
+.preview-btn-active {
+  background: var(--accent-soft) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--accent) !important;
 }
 
 /* ── Text CV ────────────────────────────────────────────────── */

@@ -65,7 +65,7 @@ function renderProjects() {
   grid.innerHTML = projects.map((p, i) => `
     <div class="project-card" onclick="openProjectModal(${i})" role="button" tabindex="0"
          aria-label="View details for ${p.title}"
-         onkeydown="if(event.key==='Enter')openProjectModal(${i})">
+         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectModal(${i})}">
       ${p.images.length > 0
         ? `<img class="project-card-img" src="${p.images[0].src || p.images[0]}" alt="${p.title}" loading="lazy">`
         : `<div class="project-card-img-placeholder">

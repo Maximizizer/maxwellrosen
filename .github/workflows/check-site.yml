@@ -1,0 +1,31 @@
+# Typo check: runs on every push and pull request.
+# Catches broken HTML (unclosed tags or comments, missing quotes, misspelled tags,
+# duplicate ids) and JavaScript syntax errors, e.g. from edits in GitHub's web editor.
+# A red X on the commit means something is broken; click it to see the file and line.
+# This does not block GitHub Pages from publishing.
+name: Check site
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Check JavaScript syntax
+        run: |
+          for f in js/*.js; do
+            echo "Checking $f"
+            node --check "$f"
+          done
+
+      - name: Check HTML
+        # Rules are in .htmlvalidate.json
+        run: npx --yes html-validate@11.16.4 *.html interests/*.html projects/*.html

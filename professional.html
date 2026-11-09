@@ -4,16 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--
-  ╔══════════════════════════════════════════════════════════════╗
-  ║  HOW TO UPDATE YOUR DOCUMENTS                                ║
-  ║  ──────────────────────────────────────────────────────────  ║
-  ║  Simply drop your PDF files into the documents/ folder       ║
-  ║  using these exact filenames:                                ║
-  ║                                                              ║
-  ║    documents/personal-statement.pdf                          ║
-  ║    documents/resume.pdf                                      ║
-  ║    documents/cv.pdf                                          ║
-  ╚══════════════════════════════════════════════════════════════╝
+    HOW TO UPDATE THIS PAGE
+    - PDFs: upload to documents/ with the exact names resume.pdf and cv.pdf (replace the old file).
+    - Text CV: edit the <section class="cv-section"> blocks below. Each job/item is one
+      <article class="cv-entry">. Delete or copy a whole <article> to remove or add an entry.
+    - Do not put a phone number or home address on this page.
   -->
   <title>Professional — Maxwell Rosen</title>
   <meta property="og:type"  content="website">
@@ -40,50 +35,15 @@
       background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 60%, #f0fdfa 100%);
       border-radius: 18px;
       padding: 48px;
-      margin-bottom: 56px;
+      margin-bottom: 32px;
       border: 1px solid #99f6e4;
     }
     [data-theme="dark"] .pro-hero {
       background: linear-gradient(135deg, rgba(20,184,166,0.08) 0%, rgba(20,184,166,0.14) 60%, rgba(20,184,166,0.08) 100%);
       border-color: rgba(20,184,166,0.25);
     }
-
-    .doc-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      padding: 3px 10px;
-      border-radius: 999px;
-    }
-    .doc-status.available {
-      background: #dcfce7;
-      color: #15803d;
-    }
-    .doc-status.missing {
-      background: #fef3c7;
-      color: #92400e;
-    }
-    .doc-status-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    .preview-btn-active {
-      background: var(--accent-soft) !important;
-      color: var(--accent) !important;
-      border-color: var(--accent) !important;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
+    @media (max-width: 768px) {
+      .pro-hero { padding: 32px 24px; }
     }
   </style>
 </head>
@@ -92,7 +52,7 @@
 <!-- ── Navigation ──────────────────────────────────────────── -->
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html">Maxwell Rosen</a><!-- ← CHANGE THIS -->
+    <a class="nav-brand" href="index.html">Maxwell Rosen</a>
     <div class="nav-links">
       <a href="index.html">About</a>
       <a href="professional.html">Professional</a>
@@ -117,29 +77,19 @@
     <!-- Hero -->
     <div class="pro-hero">
       <p class="section-label">Professional</p>
-      <h1 class="page-title">Documents &amp; Materials</h1>
+      <h1 class="page-title">Curriculum Vitae</h1>
       <p class="page-subtitle">
-        Preview or download my professional documents below. All files open
-        directly in the browser — no download required.
+        Chemical Engineering at UC San Diego. Research in plant phenotyping and microfluidics.
+        The full CV is below, or grab a PDF.
       </p>
     </div>
 
-
     <!-- ═══════════════════════════════════════════
-         PRIMARY DOCUMENTS
-         (Personal Statement, Resume, CV)
+         PDF DOWNLOADS
          ═══════════════════════════════════════════ -->
-    <div class="section-header">
-      <div>
-        <p class="section-label">Documents</p>
-        <h2 class="section-title">Core Materials</h2>
-      </div>
-    </div>
+    <div class="doc-grid doc-grid-compact">
 
-    <div class="doc-grid" style="grid-template-columns: 1fr;">
-
-      <!-- ── Resume ── -->
-      <div class="doc-card" id="card-resume">
+      <div class="doc-card">
         <div class="doc-card-header">
           <div class="doc-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -149,33 +99,16 @@
           </div>
           <div>
             <div class="doc-card-title">Resume</div>
-            <div class="doc-card-desc">
-              One-page summary of my education, experience, and skills.
-            </div>
+            <div class="doc-card-desc">One-page summary (PDF)</div>
           </div>
         </div>
         <div class="doc-card-actions">
-          <button class="btn btn-primary btn-sm" onclick="togglePreview('resume', 'documents/resume.pdf', this)">
-            Preview
-          </button>
-          <a class="btn btn-secondary btn-sm" href="documents/resume.pdf" download>
-            Download
-          </a>
-          <a class="btn btn-ghost btn-sm" href="documents/resume.pdf" target="_blank" rel="noopener">
-            Open ↗
-          </a>
-        </div>
-        <div class="doc-preview-panel" id="preview-resume">
-          <div class="doc-preview-bar">
-            <span class="preview-title">Resume</span>
-            <button class="btn btn-ghost btn-sm" onclick="togglePreview('resume', 'documents/resume.pdf', document.querySelector('#card-resume .btn-primary'))">Close</button>
-          </div>
-          <div class="doc-iframe-wrap" id="iframe-wrap-resume"></div>
+          <a class="btn btn-primary btn-sm" href="documents/resume.pdf" target="_blank" rel="noopener">Open PDF ↗</a>
+          <a class="btn btn-secondary btn-sm" href="documents/resume.pdf" download>Download</a>
         </div>
       </div>
 
-      <!-- ── CV ── -->
-      <div class="doc-card" id="card-cv">
+      <div class="doc-card">
         <div class="doc-card-header">
           <div class="doc-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -185,32 +118,313 @@
           </div>
           <div>
             <div class="doc-card-title">Curriculum Vitae</div>
-            <div class="doc-card-desc">
-              Comprehensive record of my academic and professional history.
-            </div>
+            <div class="doc-card-desc">Full academic and professional record (PDF)</div>
           </div>
         </div>
         <div class="doc-card-actions">
-          <button class="btn btn-primary btn-sm" onclick="togglePreview('cv', 'documents/cv.pdf', this)">
-            Preview
-          </button>
-          <a class="btn btn-secondary btn-sm" href="documents/cv.pdf" download>
-            Download
-          </a>
-          <a class="btn btn-ghost btn-sm" href="documents/cv.pdf" target="_blank" rel="noopener">
-            Open ↗
-          </a>
-        </div>
-        <div class="doc-preview-panel" id="preview-cv">
-          <div class="doc-preview-bar">
-            <span class="preview-title">Curriculum Vitae</span>
-            <button class="btn btn-ghost btn-sm" onclick="togglePreview('cv', 'documents/cv.pdf', document.querySelector('#card-cv .btn-primary'))">Close</button>
-          </div>
-          <div class="doc-iframe-wrap" id="iframe-wrap-cv"></div>
+          <a class="btn btn-primary btn-sm" href="documents/cv.pdf" target="_blank" rel="noopener">Open PDF ↗</a>
+          <a class="btn btn-secondary btn-sm" href="documents/cv.pdf" download>Download</a>
         </div>
       </div>
 
-    </div><!-- /doc-grid -->
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         TEXT CV
+         Source: documents/cv.pdf. Keep in sync when the PDF changes.
+         ═══════════════════════════════════════════ -->
+    <div class="cv">
+
+      <nav class="cv-jump" aria-label="CV sections">
+        <a href="#education">Education</a>
+        <a href="#publications">Publications</a>
+        <a href="#research">Research</a>
+        <a href="#technical">Technical</a>
+        <a href="#projects">Projects</a>
+        <a href="#leadership">Leadership</a>
+        <a href="#high-school">High School</a>
+        <a href="#skills">Skills</a>
+        <a href="#awards">Awards</a>
+        <a href="#service">Service</a>
+      </nav>
+
+      <!-- ── Education ── -->
+      <section class="cv-section" id="education">
+        <h2 class="cv-heading">Education</h2>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">University of California, San Diego</h3>
+            <span class="cv-entry-date">Sep 2024 – Expected Jun 2028</span>
+          </div>
+          <p class="cv-entry-sub">B.S. Chemical Engineering · Minor in Business Economics · San Diego, CA</p>
+          <ul>
+            <li><strong>GPA:</strong> 3.96</li>
+            <li><strong>Relevant coursework:</strong> Chemical Reaction Engineering, Thermodynamics, Material and Energy Balances, Organic Chemistry, Fluid Mechanics</li>
+            <li>Marshall College Honors Program</li>
+          </ul>
+        </article>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">La Cañada High School</h3>
+            <span class="cv-entry-date">Aug 2020 – Jun 2024</span>
+          </div>
+          <p class="cv-entry-sub">High School Diploma · La Cañada, CA</p>
+          <ul>
+            <li><strong>GPA:</strong> 4.00 · <strong>AP:</strong> Calculus BC (5), Chemistry (5), Biology (5), European History (5), Physics C (4)</li>
+            <li><strong>Pasadena City College dual enrollment:</strong> Multivariable Calculus, Linear Algebra, Career Planning</li>
+            <li><strong>Relevant coursework:</strong> Sports Medicine, Medical Biology</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ── Publications ── -->
+      <section class="cv-section" id="publications">
+        <h2 class="cv-heading">Publications</h2>
+
+        <article class="cv-entry cv-pub">
+          <p>
+            Ovadia R, <strong>Rosen MG</strong>, Li KR, Abhilashkumar AV, Toda TJ, Jow B, Ecker JR, Illouz-Eliaz N.
+            “PhenOmni: A Low-Cost, Modular Phenotyping Platform Integrating Automated Imaging and Soil
+            Moisture Sensing for High-Throughput <em>Arabidopsis thaliana</em> Growth Analysis.”
+            <em>Plants</em> (MDPI), under revision, 2026.
+          </p>
+        </article>
+      </section>
+
+      <!-- ── Research Experience ── -->
+      <section class="cv-section" id="research">
+        <h2 class="cv-heading">Research Experience</h2>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">Salk Institute for Biological Studies, Ecker Lab</h3>
+            <span class="cv-entry-date">Sep 2025 – Sep 2026</span>
+          </div>
+          <p class="cv-entry-sub">Undergraduate Research Intern · La Jolla, CA</p>
+          <ul>
+            <li>Designed and deployed 4 Raspberry Pi-based high-throughput imaging systems at 1% the cost of commercial alternatives ($500 vs. $50,000 per unit), monitoring plant growth across 200+ samples under variable environmental stress</li>
+            <li>Refactored the imaging control code from a fixed, sequential 3-camera script into a modular architecture based on tray numbering, where trays can be efficiently added or removed, doubling capacity from 4 to 8 trays</li>
+            <li>Benchmarked system cost against commercial platforms through video calls with representatives from three international plant phenotyping organizations</li>
+            <li>Second author on the PhenOmni manuscript; authored system architecture documentation, setup protocols, and cost analysis</li>
+          </ul>
+        </article>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">Microfluidic Device Research, National Taiwan University</h3>
+            <span class="cv-entry-date">Jun 2026 – Jul 2026</span>
+          </div>
+          <p class="cv-entry-sub">Visiting Undergraduate Researcher · Taipei, Taiwan · UCEAP Summer Research</p>
+          <ul>
+            <li>Investigated improvements to a thin-film direct coating microfluidic device that optimizes Western blotting by applying a thin film of reagent across the membrane and vacuuming the excess</li>
+            <li>Established saturation baselines by mass and imaging to set vacuum parameters</li>
+            <li>Developed an automated micropipetting module using a micropump and servos that eliminated manual reagent dispensing for Western blot and IHC</li>
+            <li>Identified a 50% reduction in post-coating vacuum time (10 s to 5 s) with no loss in signal; presented findings to NTU faculty and students</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ── Technical Experience ── -->
+      <section class="cv-section" id="technical">
+        <h2 class="cv-heading">Technical Experience</h2>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">EnVision Maker Studio</h3>
+            <span class="cv-entry-date">Oct 2026 – Present</span>
+          </div>
+          <p class="cv-entry-sub">Volunteer · UC San Diego</p>
+          <ul>
+            <li>Troubleshoot 3D printers, laser cutters, and fabrication tools for students, artists, and engineers working on personal and course projects</li>
+            <li>Teach peers proper equipment care and safe use</li>
+          </ul>
+        </article>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">ShowPro</h3>
+            <span class="cv-entry-date">Sep 2025 – Present</span>
+          </div>
+          <p class="cv-entry-sub">Lighting Utility · Freelance · Southern California</p>
+          <ul>
+            <li>Place and focus lighting fixtures, run DMX control and power distribution, and route cabling for live events</li>
+            <li>Uphold safety standards by coordinating power distribution and communicating hazards</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ── Projects ── -->
+      <section class="cv-section" id="projects">
+        <h2 class="cv-heading">Projects</h2>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">LongevityBench, Caltech Longevity Hackathon</h3>
+            <span class="cv-entry-date">May 2026</span>
+          </div>
+          <p class="cv-entry-sub">Team Member · Pasadena, CA</p>
+          <ul>
+            <li>Built LongevityBench with a 6-person team, a benchmark suite evaluating large language models on reasoning and trustworthiness in aging biology, submitted to the LongevityLLM Benchmarking Track sponsored by Insilico Medicine</li>
+            <li>Sourced and validated the lipidomics and gut microbiome datasets used to construct the evaluation tasks, and supported task design and analysis benchmarking a fine-tuned longevity language model</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ── Leadership & Service ── -->
+      <section class="cv-section" id="leadership">
+        <h2 class="cv-heading">Leadership &amp; Service</h2>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">Shalom Institute</h3>
+            <span class="cv-entry-date">2023 – 2025</span>
+          </div>
+          <p class="cv-entry-sub">Head Counselor &amp; Inclusion Specialist · Los Angeles · Summers &amp; Year Round</p>
+          <ul>
+            <li>Led sleepaway-camp cabins of 10+ campers and provided one-on-one inclusion support for 5 campers with special needs</li>
+            <li>Designed and facilitated 20 programs per summer on community building, environmental stewardship, and role modeling</li>
+          </ul>
+        </article>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">Triton Engineering Student Council</h3>
+            <span class="cv-entry-date">Mar 2025 – Jun 2025</span>
+          </div>
+          <p class="cv-entry-sub">Operations Committee · UC San Diego</p>
+          <ul>
+            <li>Planned social events, balancing budget for food, activities, and venue</li>
+          </ul>
+        </article>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">Goldman Sachs Possibilities Summit</h3>
+            <span class="cv-entry-date">Jan 2025 – Jun 2025</span>
+          </div>
+          <p class="cv-entry-sub">Engineering Participant · Goldman Sachs</p>
+          <ul>
+            <li>Attended engineering webinars on common industry practices, and networking sessions with Goldman Sachs engineers</li>
+            <li>Learned project lifecycle markers and how to manage long-term product development</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ── High School Activities ── -->
+      <section class="cv-section" id="high-school">
+        <h2 class="cv-heading">High School Activities</h2>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">Athletic Trainer Internship</h3>
+            <span class="cv-entry-date">Apr 2022 – Jun 2024</span>
+          </div>
+          <p class="cv-entry-sub">Senior Intern</p>
+          <ul>
+            <li>Administered first aid and injury prevention care to 40+ student-athletes under a licensed athletic trainer</li>
+            <li>Mentored 4 junior interns in hands-on care and decision-making under pressure</li>
+          </ul>
+        </article>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">Science National Honor Society</h3>
+            <span class="cv-entry-date">Oct 2021 – Jun 2024</span>
+          </div>
+          <p class="cv-entry-sub">Secretary</p>
+          <ul>
+            <li>Organized monthly community science events (20–40 participants) and arranged 25 science lectures for student audiences of 5–40</li>
+            <li>Managed the membership requirement tracker and wrote weekly updates to 120+ members as one of 5 board members</li>
+          </ul>
+        </article>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">Wrestling</h3>
+            <span class="cv-entry-date">Jul 2022 – Jun 2024</span>
+          </div>
+          <p class="cv-entry-sub">Varsity Starter</p>
+          <ul>
+            <li>Competed in 23 regional and national tournaments and mentored teammates in a 40+ athlete program</li>
+            <li>Named a CIF Southern Section Champion for Character (see <a href="#awards">Awards</a>)</li>
+          </ul>
+        </article>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">Technology Advisory Council</h3>
+            <span class="cv-entry-date">Nov 2020 – Jun 2023</span>
+          </div>
+          <p class="cv-entry-sub">Student Advisor</p>
+          <ul>
+            <li>Advised staff on technology changes to improve student-staff communication</li>
+            <li>Pilot bell schedule adopted due to my input</li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ── Skills & Certifications ── -->
+      <section class="cv-section" id="skills">
+        <h2 class="cv-heading">Skills &amp; Certifications</h2>
+
+        <dl class="cv-skills">
+          <dt>Programming</dt>
+          <dd>Python, MATLAB</dd>
+          <dt>Software &amp; Tools</dt>
+          <dd>Git, Excel, PlantCV, Autodesk Fusion (CAD)</dd>
+          <dt>Hardware</dt>
+          <dd>Raspberry Pi, ESP32, DMX lighting control</dd>
+          <dt>Lab</dt>
+          <dd>Western blot, IHC, micropipetting, imaging, data analysis</dd>
+          <dt>Certifications</dt>
+          <dd>AIChE SAChE: CCPS Process Safety Fundamentals <span class="cv-muted">(in progress)</span></dd>
+        </dl>
+      </section>
+
+      <!-- ── Awards ── -->
+      <section class="cv-section" id="awards">
+        <h2 class="cv-heading">Awards</h2>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">CIF Champion for Character</h3>
+            <span class="cv-entry-date">Sep 2023</span>
+          </div>
+          <p class="cv-entry-sub">CIF Southern Section</p>
+          <ul>
+            <li>1 of 13 student-athletes selected from thousands of applicants across the CIF Southern Section for sportsmanship, integrity, and leadership in wrestling</li>
+          </ul>
+        </article>
+
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3 class="cv-entry-title">Photography Award</h3>
+            <span class="cv-entry-date">2024</span>
+          </div>
+          <p class="cv-entry-sub">Student Competition</p>
+          <ul>
+            <li>Work x Family, Working Assumptions: Award of Excellence and Honorable Mention, <em>Rainy Nature</em></li>
+            <li>Took Commercial Photography in high school; see my class portfolio at <a href="https://rosenphoto.weebly.com/" target="_blank" rel="noopener">rosenphoto.weebly.com ↗</a></li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- ── Volunteer Service ── -->
+      <section class="cv-section" id="service">
+        <h2 class="cv-heading">Volunteer Service</h2>
+
+        <ul class="cv-list">
+          <li><strong>AIChE Annual Meeting, San Diego</strong> <span class="cv-muted">(Oct 2024, 5.5 hrs)</span>: checked in attendees for the K-12 showcase and general sessions</li>
+          <li><strong>American Red Cross Blood Drives</strong> <span class="cv-muted">(2023, 12 hrs)</span>: set-up, donor check-in, and take-down; donated blood</li>
+          <li><strong>Operation Gratitude, Los Angeles</strong> <span class="cv-muted">(2023, 6 hrs)</span>: assembled 30 care packages for deployed U.S. service members</li>
+          <li><strong>Math Competitions</strong> <span class="cv-muted">(2022–2024, 25 hrs)</span>: set-up, check-in, and grading for 3 Mathzilla and 2 Aleph events</li>
+          <li><strong>Heal the Bay Beach Cleanup</strong> <span class="cv-muted">(2019, 15 hrs)</span>: 3 days at beaches around Los Angeles picking up trash and beautifying the coast</li>
+        </ul>
+      </section>
+
+    </div><!-- /cv -->
 
   </div><!-- /page -->
 </main>
@@ -227,62 +441,6 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  /* ── Document preview toggle ─────────────────────────────── */
-  const openPreviews = {};
-
-  function togglePreview(id, filePath, btn) {
-    const panel   = document.getElementById('preview-' + id);
-    const wrap    = document.getElementById('iframe-wrap-' + id);
-    const isOpen  = panel.classList.contains('open');
-
-    // Close all other open previews
-    document.querySelectorAll('.doc-preview-panel.open').forEach(p => p.classList.remove('open'));
-    document.querySelectorAll('.btn-primary').forEach(b => b.classList.remove('preview-btn-active'));
-
-    if (!isOpen) {
-      panel.classList.add('open');
-      btn.classList.add('preview-btn-active');
-      btn.textContent = 'Close';
-      // Lazy-load the iframe only once
-      if (!openPreviews[id]) {
-        wrap.innerHTML = buildIframe(filePath);
-        openPreviews[id] = true;
-      }
-      // Scroll to panel smoothly
-      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
-    } else {
-      btn.textContent = 'Preview';
-    }
-  }
-
-  /* ── Build iframe HTML ───────────────────────────────────── */
-  function buildIframe(src) {
-    return `
-      <iframe
-        src="${src}"
-        title="Document preview"
-        loading="lazy"
-        onerror="this.parentElement.innerHTML = noFileMsg('${src}')"
-      ></iframe>
-      <noscript>
-        <div class="doc-no-file">JavaScript is disabled — <a href="${src}">open the file directly</a>.</div>
-      </noscript>
-    `;
-  }
-
-  function noFileMsg(src) {
-    return `
-      <div class="doc-no-file">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.3">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-        </svg>
-        <strong>File not found</strong>
-        <span>Place your PDF at <code>${src}</code></span>
-        <a class="btn btn-secondary btn-sm" href="${src}" target="_blank">Try opening directly ↗</a>
-      </div>`;
-  }
 </script>
 <script src="js/main.js"></script>
 </body>

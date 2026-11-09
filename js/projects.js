@@ -97,22 +97,18 @@ function stripHtml(html) {
 }
 
 /* ── Modal ───────────────────────────────────────────────────── */
+// Uses the shared openModal() from main.js
 function openProjectModal(index) {
-  const p       = projects[index];
-  const overlay = document.getElementById('project-modal-overlay');
-  const modal   = document.getElementById('project-modal');
-  if (!overlay || !modal) return;
+  const p = projects[index];
 
-  modal.querySelector('#modal-title').textContent    = p.title;
-  modal.querySelector('#modal-subtitle').textContent = p.subtitle || '';
-
-  const tagsEl = modal.querySelector('#modal-tags');
-  tagsEl.innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+  const tagsHtml = `<div class="tags" style="margin-top:10px;">${
+    p.tags.map(t => `<span class="tag">${t}</span>`).join('')
+  }</div>`;
 
   // Images with optional captions
-  const galleryEl = modal.querySelector('#modal-gallery');
+  let galleryHtml;
   if (p.images.length > 0) {
-    galleryEl.innerHTML =
+    galleryHtml =
       `<hr class="divider" style="margin:0 0 20px;">` +
       p.images.map(img => {
         const src     = img.src || img;
@@ -123,20 +119,13 @@ function openProjectModal(index) {
             ${caption ? `<figcaption>${caption}</figcaption>` : ''}
           </figure>`;
       }).join('');
-    galleryEl.querySelectorAll('[data-lightbox]').forEach(img => {
-      img.style.cursor = 'zoom-in';
-      img.addEventListener('click', () => openLightbox(img.src));
-    });
   } else {
-    galleryEl.innerHTML = `
+    galleryHtml = `
       <div class="modal-gallery-placeholder">
         <span style="color:var(--text-light);font-size:0.85rem;">Add images to images/projects/ and list them in projects.js</span>
       </div>`;
   }
 
-  modal.querySelector('#modal-desc').innerHTML = p.description;
-
-  const linksEl = modal.querySelector('#modal-links');
   const linkBtns = [];
   if (p.liveUrl) linkBtns.push(
     `<a class="btn btn-primary" href="${p.liveUrl}" target="_blank" rel="noopener">
@@ -153,31 +142,18 @@ function openProjectModal(index) {
   p.extraLinks.forEach(l => {
     linkBtns.push(`<a class="btn btn-ghost" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`);
   });
-  linksEl.innerHTML = linkBtns.join('');
 
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeProjectModal() {
-  const overlay = document.getElementById('project-modal-overlay');
-  if (overlay) {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderProjects();
-
-  const overlay = document.getElementById('project-modal-overlay');
-  if (overlay) {
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay) closeProjectModal();
-    });
-  }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeProjectModal();
+  openModal({
+    title:      p.title,
+    subtitle:   p.subtitle || '',
+    headerHtml: tagsHtml,
+    html: `
+      <div class="modal-desc">${p.description}</div>
+      <div class="modal-links">${linkBtns.join('')}</div>
+      <div id="modal-gallery">${galleryHtml}</div>`
   });
-});
+}
+
+function closeProjectModal() { closeModal(); }
+
+document.addEventListener('DOMContentLoaded', renderProjects);

@@ -185,48 +185,43 @@
 
       <!--
         HOW TO EDIT INTERESTS:
-        - Change the emoji in .interest-icon
-        - Change the title in .interest-title
-        - Change the description in .interest-desc
-        - Add or remove .interest-card blocks as needed
+        - Card text: edit the .interest-title / .interest-desc below (keep the description to one line).
+        - Popup content: edit interests/<slug>.html (slug = the card's data-interest value).
+        - Photos: upload to images/interests/<slug>/ and paste a <figure> block into the fragment.
+          See images/interests/README.md.
       -->
       <div class="interests-grid">
 
-        <div class="interest-card">
+        <div class="interest-card" data-interest="scifi" data-subtitle="Favorites in film, TV, and books"
+             role="button" tabindex="0" aria-label="Open Science Fiction details">
           <div class="interest-icon">🚀</div>
           <div class="interest-title">Science Fiction</div>
-          <div class="interest-desc">
-            Whether it's a novel or a film, I'm drawn to stories that ask "what if?"
-            Sci-fi fuels my curiosity about the future of technology, society, and what
-            it means to be human.
-          </div>
+          <div class="interest-desc">Stories that ask "what if?" Here are my favorites.</div>
+          <div class="interest-more">View more →</div>
         </div>
 
-        <div class="interest-card">
+        <div class="interest-card" data-interest="running" data-subtitle="My reset button"
+             role="button" tabindex="0" aria-label="Open Running details">
           <div class="interest-icon">🏃</div>
           <div class="interest-title">Running</div>
-          <div class="interest-desc">
-            Running is my reset button. There's something clarifying about putting one
-            foot in front of the other — it's where I do some of my best thinking.
-          </div>
+          <div class="interest-desc">My reset button, and where I do my best thinking.</div>
+          <div class="interest-more">View more →</div>
         </div>
 
-        <div class="interest-card">
+        <div class="interest-card" data-interest="hiking" data-subtitle="Trails and views"
+             role="button" tabindex="0" aria-label="Open Hiking details">
           <div class="interest-icon">🥾</div>
           <div class="interest-title">Hiking</div>
-          <div class="interest-desc">
-            Southern California has no shortage of great trails. I love getting out into
-            the hills and finding views that remind me how big the world actually is.
-          </div>
+          <div class="interest-desc">Chasing views on Southern California trails.</div>
+          <div class="interest-more">View more →</div>
         </div>
 
-        <div class="interest-card">
+        <div class="interest-card" data-interest="food" data-subtitle="A few favorite spots"
+             role="button" tabindex="0" aria-label="Open Food details">
           <div class="interest-icon">🍜</div>
           <div class="interest-title">Food</div>
-          <div class="interest-desc">
-            Few things bring me as much joy as a genuinely delicious meal. I'm always
-            on the hunt for the next great dish — any cuisine, any occasion.
-          </div>
+          <div class="interest-desc">Always hunting for the next great dish.</div>
+          <div class="interest-more">View more →</div>
         </div>
 
       </div>

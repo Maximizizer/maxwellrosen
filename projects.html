@@ -41,7 +41,7 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     .projects-hero {
-      padding: 64px 0 56px;
+      padding: 0 0 56px;
       border-bottom: 1px solid var(--border);
       margin-bottom: 56px;
     }
@@ -146,24 +146,7 @@
   </div><!-- /page -->
 </main>
 
-<!-- ── Project Detail Modal ───────────────────────────────── -->
-<div class="modal-overlay" id="project-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="modal" id="project-modal">
-    <div class="modal-header">
-      <div>
-        <div class="modal-title" id="modal-title"></div>
-        <div class="modal-subtitle" id="modal-subtitle"></div>
-        <div class="tags" id="modal-tags" style="margin-top:10px;"></div>
-      </div>
-      <button class="modal-close" onclick="closeProjectModal()" aria-label="Close">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-desc" id="modal-desc"></div>
-      <div class="modal-links" id="modal-links"></div>
-      <div id="modal-gallery"></div>
-    </div>
-  </div>
-</div>
+<!-- Project detail modal is created by openModal() in js/main.js -->
 
 <!-- ── Lightbox ─────────────────────────────────────────────── -->
 <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">

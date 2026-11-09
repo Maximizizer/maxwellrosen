@@ -84,17 +84,158 @@ function openLightbox(src) {
 function closeLightbox() {
   if (!lightbox) return;
   lightbox.classList.remove('open');
-  document.body.style.overflow = '';
+  // Keep the page locked if a modal is still open underneath
+  if (!isModalOpen()) document.body.style.overflow = '';
+}
+
+function isLightboxOpen() {
+  return !!(lightbox && lightbox.classList.contains('open'));
 }
 
 if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
 if (lightbox) lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLightbox(); } });
+// Any <img data-lightbox> opens the lightbox, including images added later (e.g. inside modals)
+document.addEventListener('click', e => {
+  const img = e.target.closest('img[data-lightbox]');
+  if (img) openLightbox(img.currentSrc || img.src);
+});
+
+// ── Shared modal ──────────────────────────────────────────────
+// openModal({ title, subtitle, headerHtml, html, onClose })
+// Used by project cards (projects.js) and interest cards (index.html).
+let modalOnClose = null;
+let modalReturnFocus = null;
+
+function getModal() {
+  let overlay = document.getElementById('site-modal-overlay');
+  if (overlay) return overlay;
+
+  overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.id = 'site-modal-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-labelledby', 'modal-title');
+  overlay.innerHTML = `
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="modal-title"></div>
+          <div class="modal-subtitle" id="modal-subtitle"></div>
+          <div id="modal-header-extra"></div>
+        </div>
+        <button class="modal-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>`;
+  document.body.appendChild(overlay);
+
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  overlay.querySelector('.modal-close').addEventListener('click', closeModal);
+  return overlay;
+}
+
+function openModal({ title = '', subtitle = '', headerHtml = '', html = '', onClose = null } = {}) {
+  const overlay = getModal();
+  overlay.querySelector('#modal-title').textContent = title;
+  const sub = overlay.querySelector('#modal-subtitle');
+  sub.textContent = subtitle;
+  sub.style.display = subtitle ? '' : 'none';
+  overlay.querySelector('#modal-header-extra').innerHTML = headerHtml;
+  overlay.querySelector('#modal-body').innerHTML = html;
+
+  modalOnClose = onClose;
+  modalReturnFocus = document.activeElement;
+  overlay.classList.add('open');
+  overlay.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  overlay.querySelector('.modal-close').focus({ preventScroll: true });
+  return overlay.querySelector('#modal-body');
+}
+
+// Replace the body of the open modal (e.g. after a fetch finishes)
+function setModalBody(html) {
+  const body = document.querySelector('#site-modal-overlay #modal-body');
+  if (body) body.innerHTML = html;
+}
+
+function isModalOpen() {
+  const overlay = document.getElementById('site-modal-overlay');
+  return !!(overlay && overlay.classList.contains('open'));
+}
+
+function closeModal() {
+  const overlay = document.getElementById('site-modal-overlay');
+  if (!overlay || !overlay.classList.contains('open')) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  const cb = modalOnClose;
+  modalOnClose = null;
+  if (cb) cb();
+  if (modalReturnFocus && modalReturnFocus.focus) modalReturnFocus.focus({ preventScroll: true });
+}
+
+// Escape closes the lightbox first if it's on top, otherwise the modal
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (isLightboxOpen()) closeLightbox();
+  else closeModal();
+});
+
+// ── Interest popups (index.html) ──────────────────────────────
+// Each .interest-card[data-interest="slug"] loads interests/slug.html into the modal.
+const interestCache = {};
+
+function openInterest(card) {
+  const slug     = card.dataset.interest;
+  const title    = card.querySelector('.interest-title')?.textContent.trim() || '';
+  const icon     = card.querySelector('.interest-icon')?.textContent.trim() || '';
+  const subtitle = card.dataset.subtitle || '';
+
+  openModal({
+    title: icon ? `${icon}  ${title}` : title,
+    subtitle,
+    html: interestCache[slug] || '<p class="interest-loading">Loading…</p>',
+    onClose: () => {
+      if (location.hash === '#' + slug) {
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+    }
+  });
+  history.replaceState(null, '', '#' + slug);
+
+  if (interestCache[slug]) return;
+  fetch(`interests/${slug}.html`)
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(html => {
+      interestCache[slug] = `<div class="interest-content">${html}</div>`;
+      if (isModalOpen() && location.hash === '#' + slug) setModalBody(interestCache[slug]);
+    })
+    .catch(() => {
+      if (!isModalOpen() || location.hash !== '#' + slug) return;
+      setModalBody(`
+        <div class="interest-error">
+          <strong>Couldn't load this section.</strong>
+          <span>Try refreshing the page. (If you're previewing locally, run
+          <code>python3 -m http.server</code> and open <code>localhost:8000</code>.)</span>
+        </div>`);
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('[data-lightbox]').forEach(img => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => openLightbox(img.src));
+  const cards = document.querySelectorAll('.interest-card[data-interest]');
+  cards.forEach(card => {
+    card.addEventListener('click', () => openInterest(card));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openInterest(card); }
+    });
   });
+
+  // Deep link: index.html#running opens the Running popup
+  const slug = location.hash.slice(1);
+  if (slug) {
+    const card = document.querySelector(`.interest-card[data-interest="${CSS.escape(slug)}"]`);
+    if (card) openInterest(card);
+  }
 });

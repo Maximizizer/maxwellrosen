@@ -524,6 +524,12 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
 }
 .interest-content strong { color: var(--text); font-weight: 600; }
 .interest-content .modal-gallery { margin-top: 24px; }
+.modal-gallery.portrait img { aspect-ratio: 3/4; }
+/* Masonry: mixed wide/tall photos, no cropping */
+.modal-gallery.masonry { display: block; columns: 2 220px; column-gap: 12px; }
+.modal-gallery.masonry figure { break-inside: avoid; margin: 0 0 14px; }
+.modal-gallery.masonry img { aspect-ratio: auto; height: auto; }
+.interest-content figcaption { font-size: 0.78rem; margin-top: 6px; }
 
 .favorites-list {
   list-style: none;

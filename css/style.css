@@ -1186,3 +1186,9 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
   .hero-name { font-size: 2rem; }
   .photo-grid { grid-template-columns: 1fr; }
 }
+
+.footer-updated {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--text-light);
+}

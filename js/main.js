@@ -226,3 +226,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (card) openInterest(card);
   }
 });
+
+// ── Footer "Last updated" ─────────────────────────────────────
+// Uses the page's Last-Modified header, which GitHub Pages sets to the
+// time of the latest deploy, so it updates on every push with no edits.
+(function () {
+  const el = document.getElementById('last-updated');
+  if (!el) return;
+  const d = new Date(document.lastModified);
+  if (isNaN(d)) return;
+  el.dateTime = d.toISOString().slice(0, 10);
+  el.textContent = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  el.parentElement.hidden = false;
+})();

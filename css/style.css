@@ -849,6 +849,10 @@ h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
 
 .cv-muted { color: var(--text-light); font-size: 0.85em; }
 
+/* About page: highlighted CV entries */
+.highlight-entries { margin-top: 24px; }
+.highlight-entries .cv-entry { padding-left: 0; }
+
 @media (max-width: 600px) {
   .cv-entry { padding-left: 0; }
   .cv-list { padding-left: 18px; }

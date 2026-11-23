@@ -52,7 +52,7 @@ Filter buttons are auto-generated from all unique tags. The modal renders: descr
 
 ### Theming (dark mode)
 
-CSS variables are defined in `:root` (light) and overridden in `[data-theme="dark"]`. Key accent color: `#0d9488` (light) / `#14b8a6` (dark). Toggle state is persisted in `localStorage('theme')`. Each HTML page has an inline `<script>` in `<head>` that reads localStorage/system preference before CSS loads — this prevents flash of unstyled content (FOUC). Do not remove these inline scripts.
+CSS variables are defined in `:root` (light) and overridden in `[data-theme="dark"]`. Key accent color: `#0d9488` (light) / `#14b8a6` (dark). Toggle state is kept in `sessionStorage('theme')` for the current visit only; each new visit follows the system preference (light if none). Old `localStorage('theme')` values are cleared on load. Each HTML page has an inline `<script>` in `<head>` that reads localStorage/system preference before CSS loads — this prevents flash of unstyled content (FOUC). Do not remove these inline scripts.
 
 ### Images
 

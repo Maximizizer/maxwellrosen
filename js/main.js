@@ -19,7 +19,7 @@ function updateToggleIcons() {
 function toggleTheme() {
   const next = isDark() ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
+  try { sessionStorage.setItem('theme', next); } catch (e) {}
   updateToggleIcons();
 }
 
@@ -32,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Also listen for system preference changes
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-  if (!localStorage.getItem('theme')) {
+  let saved = null;
+  try { saved = sessionStorage.getItem('theme'); } catch (err) {}
+  if (!saved) {
     document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
     updateToggleIcons();
   }
